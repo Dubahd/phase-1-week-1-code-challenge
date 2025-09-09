@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Net Salary Calculator</title>
+</head>
+<body>
+  <script>
+    function calculateNSSF(grossSalary) {
+      let tier1 = Math.min(grossSalary, 8000) * 0.06;
+      let tier2 = 0;
+
+      if (grossSalary > 8000) {
+        tier2 = Math.min(grossSalary - 8000, 72000 - 8000) * 0.06;
+      }
+
+      return tier1 + tier2;
+    }
+
+    function calculateSHIF(grossSalary) {
+      return Math.max(0.0275 * grossSalary, 300);
+    }
+
+    function calculatePAYE(taxableIncome) {
+      let tax = 0;
+
+      if (taxableIncome <= 24000) {
+        tax = taxableIncome * 0.10;
+      } else if (taxableIncome <= 32333) {
+        tax = (24000 * 0.10) + ((taxableIncome - 24000) * 0.25);
+      } else if (taxableIncome <= 500000) {
+        tax = (24000 * 0.10) + (8333 * 0.25) + ((taxableIncome - 32333) * 0.30);
+      } else if (taxableIncome <= 800000) {
+        tax = (24000 * 0.10) + (8333 * 0.25) + (467667 * 0.30) + ((taxableIncome - 500000) * 0.325);
+      } else {
+        tax = (24000 * 0.10) + (8333 * 0.25) + (467667 * 0.30) + (300000 * 0.325) + ((taxableIncome - 800000) * 0.35);
+      }
+
+      // Apply personal relief (KSh 2400 per month)
+      tax -= 2400;
+      return Math.max(tax, 0);
+    }
+
+    function calculateNetSalary() {
+      let basicSalary = parseFloat(prompt("Enter your basic salary:"));
+      let benefits = parseFloat(prompt("Enter your benefits:"));
+
+      if (isNaN(basicSalary) || isNaN(benefits) || basicSalary < 0 || benefits < 0) {
+        alert("Invalid input! Please enter valid positive numbers.");
+        return;
+      }
+
+      let grossSalary = basicSalary + benefits;
+      let nssf = calculateNSSF(grossSalary);
+      let shif = calculateSHIF(grossSalary);
+      let taxableIncome = grossSalary - nssf;
+      let paye = calculatePAYE(taxableIncome);
+      let netSalary = grossSalary - (nssf + shif + paye);
+
+      alert(
+        `
+        Gross Salary: KSh ${grossSalary.toFixed(2)}\n
+        NSSF Deduction: KSh ${nssf.toFixed(2)}\n
+        SHIF Deduction: KSh ${shif.toFixed(2)}\n
+        PAYE (Tax): KSh ${paye.toFixed(2)}\n
+        Net Salary: KSh ${netSalary.toFixed(2)}`
+      );
+    //   definition of .toFixed 
+    // Returns a string representing a number in fixed-point notation.
+    // @param fractionDigits Number of digits after the decimal point. Must be in the range 0 - 20, inclusive.
+    // toFixed(fractionDigits?: number): string;
+    }
+
+    // Run calculator
+    calculateNetSalary();
+  </script>
+</body>
+</html>

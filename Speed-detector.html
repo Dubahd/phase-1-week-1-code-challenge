@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Detector</title>
+</head>
+<body>
+    <script>
+        // Ask the user for input
+        let speed = parseInt(prompt("Please input your speed"));
+        let points = 0;
+    
+        // Validate input
+        if(isNaN(speed) || speed < 0){
+            alert("Please input a number that is not less than 0");
+        } else {
+            if(speed <= 70) {
+                alert("Ok")
+            } else if(speed > 70){
+                let overSpeed = Math.floor(speed - 70);
+                points = Math.floor(overSpeed / 5);
+                if(points > 12){
+                    alert("License suspended")
+                    
+                }else{
+                    alert(`Your total demerit points are: ${points}`)
+                }
+                
+            }
+            
+        }
+
+    </script>
+    
+</body>
+</html>

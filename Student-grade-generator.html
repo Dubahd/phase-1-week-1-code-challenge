@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Grade Generator</title>
+</head>
+<body>
+  <script>
+    // Ask the user for input
+    let marks = parseInt(prompt("Enter your marks between 0 - 100:"));
+    let grade;
+    // Validate input
+    if (isNaN(marks)|| marks < 0 || marks > 100) {
+      alert("Please enter a number between 0 and 100.");
+    } else {
+      
+
+      if (marks > 79) {
+        grade = "A";
+      } else if (marks >= 60) {
+        grade = "B";
+      } else if (marks >= 50) {
+        grade = "C";
+      } else if (marks >= 40) {
+        grade = "D";
+      } else {
+        grade = "E";
+      }
+
+      // Show result
+      alert(`Your grade is: ${grade}`);
+    }
+  </script>
+</body>
+</html>
