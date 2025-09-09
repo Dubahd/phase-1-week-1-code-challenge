@@ -28,6 +28,7 @@ Installation instructions
 
 Technologies used
 -Javascript
+-HTML
 
 Support and contact details
 [text](https://github.com/Dubahd)
